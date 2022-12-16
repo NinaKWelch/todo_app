@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ALL_TODOS, CREATE_TODO } from './queries'
 
-const AddTodo = () => {
+const TodoForm = () => {
   const [text, setText ] = useState('')
   const [completed, setCompleted ] = useState(false)
 
@@ -35,34 +35,29 @@ const AddTodo = () => {
   }
 
   return (
-    <div>
-      <h3>Add Todo</h3>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <label>
-          Text:{' '}
-          <input
-            type="text"
-            name="text"
-            value={text}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Completed:{' '}
-          <input
-            type="checkbox"
-            name="completed"
-            checked={completed}
-            onChange={handleChange}
-          />
-        </label>
-        <button type='submit'>Add</button>
-      </form>
-    </div>
+        Text:{' '}
+        <input
+          type="text"
+          name="text"
+          value={text}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label>
+        Completed:{' '}
+        <input
+          type="checkbox"
+          name="completed"
+          checked={completed}
+          onChange={handleChange}
+        />
+      </label>
+      <button type='submit'>Add</button>
+    </form>
   )
 }
 
-AddTodo.propTypes = {}
-
-export default AddTodo
+export default TodoForm
