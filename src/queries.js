@@ -11,7 +11,7 @@ export const ALL_TODOS = gql`
 `
 
 export const CREATE_TODO = gql`
-  mutation createTodo($text: String!, $completed: Boolean) {
+  mutation createTodo($text: String!, $completed: Boolean!) {
     addTodo(
       text: $text,
       completed: $completed,
