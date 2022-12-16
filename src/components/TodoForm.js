@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { ALL_TODOS, CREATE_TODO } from './queries'
+import { ALL_TODOS, CREATE_TODO } from '../queries'
 
 const TodoForm = () => {
   const [text, setText ] = useState('')
@@ -36,26 +36,32 @@ const TodoForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Text:{' '}
-        <input
-          type="text"
-          name="text"
-          value={text}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Completed:{' '}
-        <input
-          type="checkbox"
-          name="completed"
-          checked={completed}
-          onChange={handleChange}
-        />
-      </label>
-      <button type='submit'>Add</button>
+      <div>
+        <label>
+          Text:{' '}
+          <input
+            type="text"
+            name="text"
+            value={text}
+            onChange={handleChange}
+            required
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Completed:{' '}
+          <input
+            type="checkbox"
+            name="completed"
+            checked={completed}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <button type='submit'>Add</button>
+      </div>
     </form>
   )
 }

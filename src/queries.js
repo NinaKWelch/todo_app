@@ -21,4 +21,26 @@ export const CREATE_TODO = gql`
       id
     }
   }
-` 
+`
+
+export const UPDATE_TODO = gql`
+  mutation updateTodo($completed: Boolean!, $id: ID!) {
+    updateTodo(
+      completed: $completed,
+      id: $id,
+    ) {
+      text
+      completed
+      id
+    }
+  }
+`
+export const DELETE_TODO = gql`
+  mutation deleteTodo($id: ID!) {
+    deleteTodo(
+      id: $id,
+    ) {
+      id
+    }
+  }
+`

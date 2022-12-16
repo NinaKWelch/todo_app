@@ -35,6 +35,13 @@ const typeDefs = gql`
       text: String!
       completed: Boolean!
      ): Todo
+    updateTodo(
+      completed: Boolean!
+      id: ID!
+    ): Todo
+    deleteTodo(
+      id: ID!
+    ): Todo
   }
 `
 
@@ -49,10 +56,24 @@ const resolvers = {
       return todo
     },
     updateTodo: (root, args) => {
-      todos = todos.map((todo) => todo.id !== args.id ? todo : args)
+      const todo = todos.find(t => t.id === args.id)
+      if (!todo) {
+        return null
+      }
+
+      const updatedTodo = { ...todo, completed: args.completed }
+      todos = todos.map((t) => t.id !== args.id ? t : updatedTodo)
+      return todo
     },
-    deleteTodo: (root, id) => {
-      todos = todos.filter((todo) => todo.id !== id)
+    deleteTodo: (root, args) => {
+      const id = args.id
+      const todo = todos.find(t => t.id === id)
+      if (!todo) {
+        return null
+      }
+
+      todos = todos.filter((t) => t.id !== id)
+      return null
     }
   }
 }

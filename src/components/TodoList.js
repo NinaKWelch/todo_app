@@ -1,24 +1,27 @@
 import TodoListItem from './TodoListItem'
 import { useQuery } from '@apollo/client'
-import { ALL_TODOS } from './queries'
+import { ALL_TODOS } from '../queries'
 
 const TodoList = () => {
   const { data, loading, error } = useQuery(ALL_TODOS)
+  const warningStyle = {
+    color: 'red'
+  }
 
   if (loading) {
     return <p>loading...</p>
   }
 
   if (error) {
-    return <p>Data fetching error</p>
+    return <p style={warningStyle}>Data fetching error</p>
   }
 
   if (!data) {
-    return <p>Missing data</p>
+    return <p style={warningStyle}>Missing data</p>
   }
 
   return (
-    <ul>
+    <ul style={{ listStyle: 'none', paddingInlineStart: '0px' }}>
       {data.allTodos.map((todo) =>
         <TodoListItem key={todo.id} todo={todo} />
       )}
