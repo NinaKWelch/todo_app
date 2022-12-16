@@ -1,16 +1,9 @@
 import './App.css';
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import { ALL_TODOS } from './queries'
 import Todos from './Todos'
 
-const ALL_TODOS = gql`
-query {
-  allTodos {
-    text
-    completed
-    id
-  }
-}
-`
+
 const App = () => {
   const result = useQuery(ALL_TODOS)
 

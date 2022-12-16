@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, UserInputError, gql } = require('apollo-server')
+const { v1: uuid } = require('uuid')
 
 let todos = [
   {
@@ -28,11 +29,31 @@ const typeDefs = gql`
   type Query {
     allTodos: [Todo!]!
   }
+
+  type Mutation {
+    addTodo(
+      text: String!
+      completed: Boolean
+     ): Todo
+  }
 `
 
 const resolvers = {
   Query: {
     allTodos: () => todos,
+  },
+  Mutation: {
+    addTodo: (root, args) => {
+      if (todos.find(todo => todo.text === args.text)) {
+        throw new UserInputError('Todo must be unique', {
+          invalidArgs: args.text,
+        })
+      }
+
+      const todo = { ...args, id: uuid() }
+      todos = todos.concat(todo)
+      return todo
+    }
   }
 }
 
