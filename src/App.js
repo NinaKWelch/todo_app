@@ -1,18 +1,32 @@
 import './App.css';
 import { useQuery } from '@apollo/client'
 import { ALL_TODOS } from './queries'
+import AddTodo from './AddTodo'
 import Todos from './Todos'
 
 
 const App = () => {
-  const result = useQuery(ALL_TODOS)
+ const { data, loading, error } = useQuery(ALL_TODOS)
 
-  if (result.loading) {
+  if (loading) {
     return <div>loading...</div>
   }
 
+  if (error) {
+    return <div>Data fetching error</div>
+  }
+
+  if (!data) {
+    return <div>Missing data</div>
+  }
+
   return (
-    <Todos todos={result.data.allTodos}/>
+    <>
+      <h1>Todo App</h1>
+      <AddTodo  />
+      <Todos todos={data.allTodos}/>
+    </>
+
   )
 }
 

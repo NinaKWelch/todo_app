@@ -1,10 +1,7 @@
-import AddTodo from './AddTodo'
-
 const Todos = ({ todos }) => {
   return (
     <div>
-      <h2>Todos</h2>
-      <AddTodo />
+      <h2>Todo list:</h2>
       {todos.map(todo =>
         <div key={todo.id}>
           {todo.text} {todo.completed}
