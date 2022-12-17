@@ -13,7 +13,7 @@ const TodoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    createTodo({  variables: { text, completed } })
+    createTodo({ variables: { text, completed } })
 
     setText('')
     setCompleted(false)
