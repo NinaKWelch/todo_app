@@ -1,5 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server')
-const { v1: uuid } = require('uuid')
+import { ApolloServer, gql } from 'apollo-server'
+import { v4 as uuidv4 } from 'uuid'
 
 let todos = [
   {
@@ -19,7 +19,7 @@ let todos = [
   },
 ]
 
-const typeDefs = gql`
+export const typeDefs = gql`
   type Todo {
     text: String!
     completed: Boolean!
@@ -33,10 +33,10 @@ const typeDefs = gql`
   type Mutation {
     addTodo(
       text: String!
-      completed: Boolean!
      ): Todo
     updateTodo(
-      completed: Boolean!
+      text: String
+      completed: Boolean
       id: ID!
     ): Todo
     deleteTodo(
@@ -45,13 +45,13 @@ const typeDefs = gql`
   }
 `
 
-const resolvers = {
+export const resolvers = {
   Query: {
     allTodos: () => todos,
   },
   Mutation: {
     addTodo: (root, args) => {
-      const todo = { ...args, id: uuid() }
+      const todo = { text: args.text, completed: false, id: uuidv4() }
       todos = todos.concat(todo)
       return todo
     },
