@@ -28,7 +28,8 @@ For these the biggest challenge was time and that showed in the rushed execution
 
 The most techincally challenging feature for me would have been the pagination, as I have not done it before with graphQl. 
 
-## 
+## CODA
 
+After completing the timed test I created another git branch (_add-ons_) and kept on working the code. I also added tests and pagination. I stopped short of deploying the app on Heroku, as they no longer offer the free tier.
 
-The developer should write a brief report summarizing the work done and any challenges encountered during the test. The report should include a description of the features implemented in the app, any challenges faced, and how they were overcome. It should also include a link to the deployed app and any instructions for running the app locally.
+Most of my time was spent on the pagination, which proved challenging. It required a lot of reading, mainly Apollo docs and then working out a simple way to integrate the pagination library on the front end.
