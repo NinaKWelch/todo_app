@@ -10,6 +10,19 @@ export const ALL_TODOS = gql`
   }
 `
 
+export const TODO_FEED = gql`
+  query todoFeed($offset: Int, $limit: Int) {
+    todoFeed(
+      offset: $offset,
+      limit: $limit
+    ) {
+      text
+      completed
+      id
+    }
+  }
+`
+
 export const CREATE_TODO = gql`
   mutation createTodo($text: String!) {
     addTodo(

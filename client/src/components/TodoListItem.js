@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/client'
-import { UPDATE_TODO, DELETE_TODO, ALL_TODOS } from '../queries'
+import { UPDATE_TODO, DELETE_TODO, ALL_TODOS, TODO_FEED } from '../queries'
 
 const TodoListItem = ({ todo }) => {
   const [ updateTodo ] = useMutation(UPDATE_TODO, {
-    refetchQueries: [ { query: ALL_TODOS } ]
+    refetchQueries: [ { query: ALL_TODOS }, { query: TODO_FEED } ]
   })
 
   const [ deleteTodo ] = useMutation(DELETE_TODO, {
-    refetchQueries: [ { query: ALL_TODOS } ]
+    refetchQueries: [ { query: ALL_TODOS }, { query: TODO_FEED } ]
   })
 
   const update = () =>

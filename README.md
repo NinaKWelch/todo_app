@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+The following 3-hour test for a Junior mid-level full stack developer using GraphQL, Apollo, JavaScript, 
+Node.js, and React will need to be added to a github repository and shared at the end of time and shared
+to marius@anderspink.com. Ideally would be to complete as much as possible.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. The developer should create a simple React app that fetches data from a GraphQL API using Apollo.
+The app should have a single page with a list of items fetched from the API.
+The developer should use Apollo Client to connect to the API and fetch the data, and then display 
+the data on the page using React components.
 
-## Available Scripts
+2. The developer should add a form to the page that allows the user to add new items to the list.
+The form should have input fields for the necessary data for the new item, and a submit button 
+to send the data to the API. The developer should use Apollo Client to send a mutation to 
+the API to create the new item. After the mutation is successful, the new item should be added 
+to the list on the page.
 
-In the project directory, you can run:
+3. The developer should modify the app to show a loading indicator while data is being fetched
+from the API, and display an error message if there is an error fetching the data. This can be
+done using Apollo Client's <Query> component, which has built-in support for loading and error
+states.
 
-### `npm start`
+4. The developer should add pagination to the app, so that only a limited number of items are
+shown at a time, and the user can navigate to different pages to see more items. This can be
+done by using the skip and limit arguments in the GraphQL query to only fetch a certain number
+of items at a time, and using the <Pagination> component from a pagination library like
+react-paginate to allow the user to navigate between pages.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+5. The developer should write a simple Node.js server that exposes a GraphQL API with a single
+query and multiple mutations. The query should return a list of items, and the mutation should allow
+new items to be added to the list. The developer can use a library like graphql-yoga to quickly
+set up a GraphQL server, and define the schema and resolvers for the query and mutations.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+6. The developer should write a set of tests for the server using a testing framework like Jest,
+to ensure that the query and mutations are working correctly. The tests should create a test
+server, send queries and mutations to the server, and assert that the correct data is returned.
 
-### `npm test`
+7. The developer should deploy the React app and Node.js server to a cloud platform like Heroku,
+and make sure they are working correctly in a live environment. This can be done by creating a
+new app on Heroku, connecting it to a Git repository, and pushing the code to the repository.
+The developer should also set up the necessary environment variables and dependencies on Heroku
+to run the app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+8. The developer should write a brief report summarizing the work done and any challenges
+encountered during the test. The report should include a description of the features
+implemented in the app, any challenges faced, and how they were overcome. It should also
+include a link to the deployed app and any instructions for running the app locally.
 
-### `npm run build`
+// Schema Example
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+type Todo {
+  id: ID!
+  text: String!
+  completed: Boolean!
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+type Query {
+  todos: [Todo]!
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+type Mutation {
+  addTodo(text: String!): Todo
+  updateTodo(id: ID!, text: String, completed: Boolean): Todo
+  deleteTodo(id: ID!): Todo
+}
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This schema defines a Todo type with three fields: id, text, and completed. It also defines a 
+Query type with a single field, todos, which returns a list of Todo items. Finally, it
+defines a Mutation type with three fields: addTodo, updateTodo, and deleteTodo, which allow
+new to-do items to be added, existing to-do items to be updated, and to-do items to be deleted.

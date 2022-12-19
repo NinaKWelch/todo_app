@@ -17,6 +17,11 @@ let todos = [
     completed: false,
     id: "3"
   },
+  {
+    text: "Todo 4",
+    completed: false,
+    id: "4"
+  },
 ]
 
 export const typeDefs = gql`
@@ -28,6 +33,7 @@ export const typeDefs = gql`
 
   type Query {
     allTodos: [Todo!]!
+    todoFeed(offset: Int, limit: Int): [Todo!]!
   }
 
   type Mutation {
@@ -48,6 +54,7 @@ export const typeDefs = gql`
 export const resolvers = {
   Query: {
     allTodos: () => todos,
+    todoFeed: () => todos,
   },
   Mutation: {
     addTodo: (root, args) => {

@@ -1,11 +1,37 @@
-import TodoListItem from './TodoListItem'
+import './TodoList.css'
+import React, { useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import { useQuery } from '@apollo/client'
-import { ALL_TODOS } from '../queries'
+import { TODO_FEED } from '../queries'
+import TodoListItem from './TodoListItem'
 
-const TodoList = () => {
-  const { data, loading, error } = useQuery(ALL_TODOS)
-  const warningStyle = {
-    color: 'red'
+const TodoList = ({ listLength, pageLimit }) => {
+  const [offset, setOffset] = useState(0)
+  const [limit, setLimit] = useState(pageLimit)
+  const { data, loading, error, fetchMore } = useQuery(TODO_FEED, {
+    variables: { offset, limit }
+  })
+  
+  const pageCount = Math.ceil(listLength / pageLimit)
+
+  const handleFeed = () => fetchMore({ variables: { offset, limit } })
+
+  const handlePagination = (e) => {
+    if ((e.isPrevious && e.selected === 0) || (e.isNext && e.selected === pageCount)) {
+      return
+    }
+
+    if (e.nextSelectedPage !== undefined) {
+      const newOffset = e.nextSelectedPage * 3
+      
+      // last page should only show as many todos as there are left
+      listLength - newOffset < pageLimit
+        ? setLimit(listLength % pageLimit)
+        : setLimit(pageLimit)
+
+      setOffset(newOffset)
+      handleFeed(e.nextSelectedPage)
+    }
   }
 
   if (loading) {
@@ -13,19 +39,29 @@ const TodoList = () => {
   }
 
   if (error) {
-    return <p style={warningStyle}>Data fetching error</p>
+    return <p className="warning">Data fetching error</p>
   }
 
   if (!data) {
-    return <p style={warningStyle}>Missing data</p>
+    return <p className="warning">Missing data</p>
   }
 
   return (
-    <ul style={{ listStyle: 'none', paddingInlineStart: '0px' }}>
-      {data.allTodos.map((todo) =>
-        <TodoListItem key={todo.id} todo={todo} />
-      )}
-    </ul>
+    <>
+      <ul>
+        {data.todoFeed.map((todo) =>
+          <TodoListItem key={todo.id} todo={todo} />
+        )}
+      </ul>
+      <ReactPaginate
+        onClick={(e) => handlePagination(e)}
+        pageCount={pageCount}
+        breakLabel="..."
+        previousLabel="< prev"
+        nextLabel="next >"
+        renderOnZeroPageCount={null}
+      />
+    </>
   )
 }
 
