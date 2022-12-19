@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Todo React App with GraphQL and Apollo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Webpage
 
-## Available Scripts
+Currently the app can only be run locally.
 
-In the project directory, you can run:
+## How to run locally
 
-### `npm start`
+### Server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Navigate to the _todo_app/server_ file and run `npm start` or `npm run dev`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Both options start the server at http://localhost:4000/
 
-### `npm test`
+### Server testing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Navigate to the _todo_app/server_ file and run `npm run test`
 
-### `npm run build`
+### Client
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When server is ready, navigate to the _todo_app/client_ file and run `npm start`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Summary
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Having had a look at the test requirements I knew immediately, that I would not be able to complete all of them in the given time. Knowing this, my plan was to attempt completing parts 1, 2, 3, 5 and possibly 6. In the end I did manage to do first four within 3 hours.
 
-### `npm run eject`
+For these the biggest challenge was time and that showed in the rushed execution which usually means the code would need refactoring to be of a good standard. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The most techincally challenging feature for me would have been the pagination, as I have not done it before with graphQl. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The developer should write a brief report summarizing the work done and any challenges encountered during the test. The report should include a description of the features implemented in the app, any challenges faced, and how they were overcome. It should also include a link to the deployed app and any instructions for running the app locally.
