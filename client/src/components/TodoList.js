@@ -1,5 +1,5 @@
 import './TodoList.css'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useQuery } from '@apollo/client'
 import { TODO_FEED } from '../queries'
@@ -17,10 +17,6 @@ const TodoList = ({ listLength, pageLimit }) => {
   const handleFeed = () => fetchMore({ variables: { offset, limit } })
 
   const handlePagination = (e) => {
-    if ((e.isPrevious && e.selected === 0) || (e.isNext && e.selected === pageCount)) {
-      return
-    }
-
     if (e.nextSelectedPage !== undefined) {
       const newOffset = e.nextSelectedPage * pageLimit
       
