@@ -29,7 +29,7 @@ describe('Query tests', () => {
       })
 
       expect(result.errors).toBeUndefined()
-      expect(result.data.allTodos.length).toBe(3)
+      expect(result.data.allTodos.length).toBe(4)
     } catch (err) {
       console.log(err)
     }
