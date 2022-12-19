@@ -22,7 +22,7 @@ const TodoList = ({ listLength, pageLimit }) => {
     }
 
     if (e.nextSelectedPage !== undefined) {
-      const newOffset = e.nextSelectedPage * 3
+      const newOffset = e.nextSelectedPage * pageLimit
       
       // last page should only show as many todos as there are left
       listLength - newOffset < pageLimit
