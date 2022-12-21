@@ -48,12 +48,12 @@ const resolvers = {
       todos = todos.concat(todo)
       return todo
     },
-    updateTodo: (root, args) => {
-      todos = todos.map((todo) => todo.id !== args.id ? todo : args)
-    },
-    deleteTodo: (root, id) => {
-      todos = todos.filter((todo) => todo.id !== id)
-    }
+    // updateTodo: (root, args) => {
+    //   todos = todos.map((todo) => todo.id !== args.id ? todo : args)
+    // },
+    // deleteTodo: (root, id) => {
+    //   todos = todos.filter((todo) => todo.id !== id)
+    // }
   }
 }
 
