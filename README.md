@@ -56,9 +56,9 @@ After completing the timed test I created another git branch (_add-ons_) and kep
 
 Most of my time was spent on the pagination, which proved challenging. It required a lot of reading, mainly Apollo docs and then working out a simple way to integrate the pagination library on the front end.
 
-The app logic could still benefit form some improvement. At the moment, all changes to the todo list are updated by fetching data from the server. Better option would be to use app state. This would require server side error handling for graphQL mutations and the use of asynchronous data fetching at the front end.
+The app logic could still benefit from some improvement. At the moment, all changes to the todo list are updated by fetching data from the server. Better option would be to use app state. This would require server side error handling for graphQL mutations and the use of asynchronous data fetching at the front end.
 
-The total number of todos should also be included in the feed query, which migth require a change to a [cursor based pagination](https://graphql.org/learn/pagination/#complete-connection-model).
+The total number of todos should also be included in the feed query, which might require a change to a [cursor based pagination](https://graphql.org/learn/pagination/#complete-connection-model).
 
 It would also be good to add tests to the front end.
 
