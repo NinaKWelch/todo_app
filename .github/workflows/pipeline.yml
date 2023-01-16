@@ -25,15 +25,15 @@ jobs:
   server_setup:
     needs: client_build
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: '19'
-        - name: install dependencies
-          run: cd server && npm install
-        - name: copy build
-          run: cd client && cp -r build ../server
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: install dependencies
+        run: cd server && npm install
+      - name: copy build
+        run: cd client && cp -r build ../server
   server_tests:
     needs: [client_build, server_setup]
     runs-on: ubuntu-latest
