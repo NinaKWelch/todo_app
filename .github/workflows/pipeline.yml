@@ -23,7 +23,6 @@ jobs:
       - name: build
         run: cd client && npm run build
   server_setup:
-    needs: client_build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,11 +31,5 @@ jobs:
           node-version: '19'
       - name: install dependencies
         run: cd server && npm install
-  server_tests:
-    needs: [client_build, server_setup]
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-        - name: unit tests
-          run: npm run test
+      - name: unit tests
+        run: cd server && npm run test
