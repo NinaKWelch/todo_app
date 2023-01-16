@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { offsetLimitPagination } from "@apollo/client/utilities"
+import { offsetLimitPagination } from '@apollo/client/utilities'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
@@ -18,7 +18,7 @@ const client = new ApolloClient({
         fields: {
           todoFeed: {
             ...offsetLimitPagination(),
-            read(existing, { args: { offset, limit }}) {
+            read(existing, { args: { offset, limit } }) {
               return existing && existing.slice(offset, offset + limit)
             },
             keyArgs: false,

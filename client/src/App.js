@@ -10,10 +10,10 @@ const App = () => {
     <>
       <h1>Todo App</h1>
       <h2>Add Todo</h2>
-      <TodoForm  />
+      <TodoForm />
       <h2>Todo list:</h2>
       <TodoList
-        listLength={(data && data.allTodos) ? data.allTodos.length : 0}
+        listLength={data && data.allTodos ? data.allTodos.length : 0}
         pageLimit={3}
       />
     </>

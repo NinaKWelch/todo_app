@@ -1,9 +1,9 @@
 ul {
   list-style: none;
-  padding-inline-start: 0 ;
+  padding-inline-start: 0;
 }
 
-ul[role=navigation] li {
+ul[role='navigation'] li {
   display: inline-block;
   padding: 0 5px;
   cursor: pointer;

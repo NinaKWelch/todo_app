@@ -14,12 +14,6 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "lint-staged": {
-    "src/*.js": "eslint --fix ",
-    "src/**/*.{js,jsx,json,css,scss,md}": [
-      "prettier --cache --write"
-    ]
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -31,13 +25,9 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "browserslist": {
     "production": [
@@ -53,9 +43,6 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.3"
+    "prettier": "2.8.3"
   }
 }

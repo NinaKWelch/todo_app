@@ -9,9 +9,9 @@ const TodoList = ({ listLength, pageLimit }) => {
   const [offset, setOffset] = useState(0)
   const [limit, setLimit] = useState(pageLimit)
   const { data, loading, error, fetchMore } = useQuery(TODO_FEED, {
-    variables: { offset, limit }
+    variables: { offset, limit },
   })
-  
+
   const pageCount = Math.ceil(listLength / pageLimit)
 
   const handleFeed = () => fetchMore({ variables: { offset, limit } })
@@ -19,7 +19,7 @@ const TodoList = ({ listLength, pageLimit }) => {
   const handlePagination = (e) => {
     if (e.nextSelectedPage !== undefined) {
       const newOffset = e.nextSelectedPage * pageLimit
-      
+
       // last page should only show as many todos as there are left
       listLength - newOffset < pageLimit
         ? setLimit(listLength % pageLimit)
@@ -45,9 +45,9 @@ const TodoList = ({ listLength, pageLimit }) => {
   return (
     <>
       <ul>
-        {data.todoFeed.map((todo) =>
+        {data.todoFeed.map((todo) => (
           <TodoListItem key={todo.id} todo={todo} />
-        )}
+        ))}
       </ul>
       <ReactPaginate
         onClick={(e) => handlePagination(e)}
