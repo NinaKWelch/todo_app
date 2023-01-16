@@ -28,5 +28,8 @@
 # dependencies
 /server/node_modules
 
+# env
+/server/.env
+
 # misc
 /server/.DS_Store

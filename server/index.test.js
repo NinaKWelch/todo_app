@@ -1,5 +1,5 @@
-import { ApolloServer } from 'apollo-server'
-import { typeDefs, resolvers } from './index'
+import { ApolloServer } from '@apollo/server'
+import { typeDefs, resolvers } from './schema'
 
 describe('Query tests', () => {
   let server
