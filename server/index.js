@@ -8,9 +8,22 @@ import express from 'express'
 import { createServer } from 'http'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
 import { typeDefs, resolvers } from './schema.js'
 
 dotenv.config()
+
+// Do not display DeprecationWarning
+mongoose.set('strictQuery', true)
+console.log('connecting to', process.env.MONGODB_URI)
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 // express server
 const start = async () => {

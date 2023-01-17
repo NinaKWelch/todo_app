@@ -1,28 +1,12 @@
+import { GraphQLError } from 'graphql'
 import gql from 'graphql-tag'
-import { v4 as uuidv4 } from 'uuid'
+import { Todo } from './models/todo.js'
 
-let todos = [
-  {
-    text: "Todo 1",
-    completed: true,
-    id: "1"
-  },
-  {
-    text: "Todo 2",
-    completed: true,
-    id: "2"
-  },
-  {
-    text: "Todo 3",
-    completed: false,
-    id: "3"
-  },
-  {
-    text: "Todo 4",
-    completed: false,
-    id: "4"
-  },
-]
+const handleError = (message, code) => {
+  throw new GraphQLError(message, {
+    extensions: { code }
+  })
+}
 
 export const typeDefs = gql`
   type Todo {
@@ -32,6 +16,7 @@ export const typeDefs = gql`
   }
 
   type Query {
+    todoCount: Int
     allTodos: [Todo!]!
     todoFeed(offset: Int, limit: Int): [Todo!]!
   }
@@ -53,33 +38,77 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    allTodos: () => todos,
-    todoFeed: () => todos,
+    todoCount: async () => Todo.collection.countDocuments(),
+    allTodos: async () => {
+      try {
+        const todos = await Todo.find({})
+        return todos
+      } catch (errors) {
+        handleError(errors.message, errors.extensions.code)
+      }
+    },
+    todoFeed: async (_, args) => {
+      try {
+        const todos = await Todo.find({})
+
+        if (args.offset && args.limit) {
+          if (todos.length > args.offset) {
+            if (todos.length > (args.offset + args.limit)) {
+              return todos.slice(args.offset, args.offset + args.limit)
+            } else {
+              return todos.slice(args.offset)
+            }
+          }
+        }
+
+        return todos
+      } catch (errors) {
+        handleError(errors.message, errors.extensions.code)
+      }
+    }
   },
   Mutation: {
-    addTodo: (root, args) => {
-      const todo = { text: args.text, completed: false, id: uuidv4() }
-      todos = todos.concat(todo)
-      return todo
-    },
-    updateTodo: (root, args) => {
-      const todo = todos.find(t => t.id === args.id)
-      if (!todo) {
-        return null
+    addTodo: async (root, args) => {
+      const todo = new Todo({ text: args.text, completed: false })
+
+      try {
+        await todo.save()
+      } catch (errors) {
+        handleError(errors.message, errors.extensions.code)
       }
 
-      const updatedTodo = { ...todo, completed: args.completed }
-      todos = todos.map((t) => t.id !== args.id ? t : updatedTodo)
       return todo
     },
-    deleteTodo: (root, args) => {
-      const id = args.id
-      const todo = todos.find(t => t.id === id)
-      if (!todo) {
-        return null
+    updateTodo: async (root, args) => {
+      try {
+        const changedTodo = await Todo.findById(args.id)
+
+        if (!changedTodo) {
+          return null
+        }
+
+        if (changedTodo) {
+          changedTodo.completed = args.completed
+
+          try {
+            await changedTodo.save()
+          } catch (errors) {
+            handleError(errors.message, errors.extensions.code)
+          }
+
+          return changedTodo
+        }
+      } catch (errors) {
+        handleError(errors.message, errors.extensions.code)
+      }
+    },
+    deleteTodo: async (_, args) => {
+      try {
+        await Todo.findByIdAndDelete(args.id)
+      } catch (errors) {
+        handleError(errors.message, errors.extensions.code)
       }
 
-      todos = todos.filter((t) => t.id !== id)
       return null
     }
   }
