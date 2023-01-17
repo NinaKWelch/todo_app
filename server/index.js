@@ -10,7 +10,6 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import { typeDefs, resolvers } from './schema.js'
 
-// PORT must be configured in .env file
 dotenv.config()
 
 // express server
@@ -31,9 +30,9 @@ const start = async () => {
     cors(),
     bodyParser.json(),
     expressMiddleware(server),
-  );
+  )
 
-  httpServer.listen(process.env.PORT, () =>
+  httpServer.listen((process.env.PORT || 4000), () =>
     console.log(`Server is now running on http://localhost:${process.env.PORT}`)
   )
 }
