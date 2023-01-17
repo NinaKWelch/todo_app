@@ -7,8 +7,7 @@
     "node": "19.x"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "heroku-prebuild": "cd server && npm install"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
