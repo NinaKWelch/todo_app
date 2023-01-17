@@ -73,4 +73,3 @@ It would also be good to add tests to the front end.
 4. Enable server production mode
 
 5. Automate build and deployment
-

@@ -1,0 +1,24 @@
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+ul[role='navigation'] li {
+  display: inline-block;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+li.selected {
+  color: blue;
+  font-weight: 800;
+}
+
+li.previous.disabled,
+li.next.disabled {
+  color: gray;
+}
+
+.warning {
+  color: red;
+}

@@ -1,67 +1,43 @@
-const { ApolloServer, gql } = require('apollo-server')
-const { v1: uuid } = require('uuid')
+// https://www.apollographql.com/docs/apollo-server/api/express-middleware
+// https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from 'dotenv'
+import { ApolloServer } from '@apollo/server'
+import { expressMiddleware } from '@apollo/server/express4'
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
+import express from 'express'
+import { createServer } from 'http'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import { typeDefs, resolvers } from './schema.js'
 
-let todos = [
-  {
-    text: "Todo 1",
-    completed: true,
-    id: "1"
-  },
-  {
-    text: "Todo 2",
-    completed: true,
-    id: "2"
-  },
-  {
-    text: "Todo 3",
-    completed: false,
-    id: "3"
-  },
-]
+// PORT must be configured in .env file
+dotenv.config()
 
-const typeDefs = gql`
-  type Todo {
-    text: String!
-    completed: Boolean!
-    id: ID!
-  }
+// express server
+const start = async () => {
+  const app = express()
+  const httpServer = createServer(app)
 
-  type Query {
-    allTodos: [Todo!]!
-  }
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  })
 
-  type Mutation {
-    addTodo(
-      text: String!
-      completed: Boolean!
-     ): Todo
-  }
-`
+  await server.start()
 
-const resolvers = {
-  Query: {
-    allTodos: () => todos,
-  },
-  Mutation: {
-    addTodo: (root, args) => {
-      const todo = { ...args, id: uuid() }
-      todos = todos.concat(todo)
-      return todo
-    },
-    // updateTodo: (root, args) => {
-    //   todos = todos.map((todo) => todo.id !== args.id ? todo : args)
-    // },
-    // deleteTodo: (root, id) => {
-    //   todos = todos.filter((todo) => todo.id !== id)
-    // }
-  }
+  app.use(
+    '/',
+    cors(),
+    bodyParser.json(),
+    expressMiddleware(server),
+  );
+
+
+  httpServer.listen(process.env.PORT, () =>
+    console.log(`Server is now running on http://localhost:${process.env.PORT}`)
+  )
 }
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-})
-
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+// start the server
+start()

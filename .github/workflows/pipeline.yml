@@ -1,0 +1,35 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - add-ons
+
+env:
+  DEFAULT_BRANCH: add-ons
+
+jobs:
+  client_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: install dependencies
+        run: cd client && npm install
+      - name: lint and format
+        run: cd client && npm run lint && npm run format
+      - name: build
+        run: cd client && npm run build
+  server_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: install dependencies
+        run: cd server && npm install
+      - name: unit tests
+        run: cd server && npm run test

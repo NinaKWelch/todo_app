@@ -1,0 +1,5 @@
+# https://prettier.io/docs/en/install.html
+/public
+.prettierrc.json
+package-lock.json
+package.json
