@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - add-ons
+      - main
 
 env:
   DEFAULT_BRANCH: add-ons
