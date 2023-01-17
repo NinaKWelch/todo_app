@@ -3,10 +3,10 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - add-ons
+      - main
 
 env:
-  DEFAULT_BRANCH: add-ons
+  DEFAULT_BRANCH: main
 
 jobs:
   client_build:

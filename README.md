@@ -2,7 +2,7 @@
 
 ## Webpage
 
-Currently the app can only be run locally.
+https://todo-app-test-server.herokuapp.com/ (server only)
 
 ## How to run locally
 
