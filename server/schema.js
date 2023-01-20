@@ -2,6 +2,7 @@ import { GraphQLError } from 'graphql'
 import gql from 'graphql-tag'
 import { Todo } from './models/todo.js'
 
+
 const handleError = (message, code) => {
   throw new GraphQLError(message, {
     extensions: { code }
@@ -43,8 +44,8 @@ export const resolvers = {
       try {
         const todos = await Todo.find({})
         return todos
-      } catch (errors) {
-        handleError(errors.message, errors.extensions.code)
+      } catch (error) {
+        handleError(error.message, error.extensions?.code)
       }
     },
     todoFeed: async (_, args) => {
@@ -62,8 +63,8 @@ export const resolvers = {
         }
 
         return todos
-      } catch (errors) {
-        handleError(errors.message, errors.extensions.code)
+      } catch (error) {
+        handleError(error.message, error.extensions?.code)
       }
     }
   },
@@ -73,8 +74,8 @@ export const resolvers = {
 
       try {
         await todo.save()
-      } catch (errors) {
-        handleError(errors.message, errors.extensions.code)
+      } catch (error) {
+        handleError(error.message, error.extensions?.code)
       }
 
       return todo
@@ -92,21 +93,21 @@ export const resolvers = {
 
           try {
             await changedTodo.save()
-          } catch (errors) {
-            handleError(errors.message, errors.extensions.code)
+          } catch (error) {
+            handleError(error.message, error.extensions?.code)
           }
 
           return changedTodo
         }
-      } catch (errors) {
-        handleError(errors.message, errors.extensions.code)
+      } catch (error) {
+        handleError(error.message, error.extensions?.code)
       }
     },
     deleteTodo: async (_, args) => {
       try {
         await Todo.findByIdAndDelete(args.id)
-      } catch (errors) {
-        handleError(errors.message, errors.extensions.code)
+      } catch (error) {
+        handleError(error.message, error.extensions?.code)
       }
 
       return null
